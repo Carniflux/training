@@ -1,19 +1,18 @@
-package com.aeter.backend.DTO;
+package com.aeter.frontend.DTO;
 
 import lombok.*;
 
 import java.util.List;
-
-@Getter
 @Setter
+@Getter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ImageDto {
 
-    Long id;
+        Long id;
 
-    String fileName;
+        String fileName;
 
-    List<String> imageTagsDto;
+        List<String> imageTagsDto;
 }

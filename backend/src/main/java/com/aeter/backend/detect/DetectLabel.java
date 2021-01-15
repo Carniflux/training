@@ -12,13 +12,10 @@ import java.util.List;
 @Service
 public class DetectLabel {
 
-
     public static List<String> detectLabel(String filePath) throws IOException {
         List<String> tags = new ArrayList<>(6);
         List<AnnotateImageRequest> requests = new ArrayList<>();
-
         ByteString imgBytes = ByteString.readFrom(new FileInputStream(filePath));
-
         Image img = Image.newBuilder().setContent(imgBytes).build();
         Feature feat = Feature.newBuilder().setType(Feature.Type.LABEL_DETECTION).build();
         AnnotateImageRequest request =
@@ -27,8 +24,6 @@ public class DetectLabel {
                         .setImage(img)
                         .build();
         requests.add(request);
-
-
         try (ImageAnnotatorClient client = ImageAnnotatorClient.create()) {
 
             BatchAnnotateImagesResponse response = client.batchAnnotateImages(requests);
@@ -40,14 +35,9 @@ public class DetectLabel {
                 for (EntityAnnotation annotation : res.getLabelAnnotationsList()) {
 
                     tags.add(annotation.getDescription());
-
-
                 }
-
-
             }
         }
-
         return tags;
     }
 }
